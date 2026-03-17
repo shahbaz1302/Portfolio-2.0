@@ -1,0 +1,71 @@
+.card-swap-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translate(5%, 20%);
+  transform-origin: bottom right;
+  perspective: 900px;
+  overflow: visible;
+}
+
+.card {
+  position: absolute;
+  background: #030303;
+  top: 50%;
+  left: 30%;
+  border-radius: 12px;
+  border: 2px solid #ffffff;
+  padding: 2rem;
+  transform-style: preserve-3d;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  & img{
+    margin-bottom: 2rem;
+  }
+  
+  & p{
+    margin-bottom: 2rem;
+    font-family: "Inter";
+    color: #ffffff;
+
+    & strong{
+      font-family: "Inter";
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@media (width<=968px) {
+  .card{
+    left: 50%;
+  }
+
+  .card-swap-container{
+    transform: scale(0.9) translate(45%, 20%);
+    -webkit-transform: scale(0.9) translate(45%, 20%);
+    -moz-transform: scale(0.9) translate(45%, 20%);
+    -ms-transform: scale(0.9) translate(45%, 20%);
+    -o-transform: scale(0.9) translate(45%, 20%);
+}
+}
+
+@media (max-width: 768px) {
+  .card-swap-container {
+    transform: scale(0.75) translate(25%, 25%);
+    bottom: 10%;
+    right: 12%;
+  }
+
+  .card{
+    left: 70%;
+    top: -50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-swap-container {
+    transform: scale(0.55) translate(25%, 25%);
+  }
+}
