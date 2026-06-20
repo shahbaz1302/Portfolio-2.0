@@ -24,24 +24,6 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  // useEffect(() => {
-  //   const lenis = new Lenis({
-  //     smooth: true,
-  //     lerp: 0.08,
-  //     wheelMultiplier: 1,
-  //     smoothTouch: false
-  //   });
-
-  //   function raf(time) {
-  //     lenis.raf(time);
-  //     ScrollTrigger.update();
-  //     requestAnimationFrame(raf);
-  //   }
-
-  //   requestAnimationFrame(raf);
-
-  //   return () => lenis.destroy();
-  // }, []);
 
   useEffect(() => {
   const lenis = new Lenis();
