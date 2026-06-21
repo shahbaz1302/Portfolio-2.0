@@ -17,9 +17,9 @@ const Projects = () => {
             <div className="desktop-projects">
                 <ScrollStack useWindowScroll>
                     <ScrollStackItem>
-                        <a href="https://khanstore.netlify.app" target="_blank"><img src="./ecommerce.jpg" alt="E-commerce Store" /></a>
-                        <h2>KHAN STORE</h2>
-                        <p>A simple and interactive eCommerce storefront featuring dynamic cart functionality. </p>
+                        <a href="https://wearix-store.vercel.app" target="_blank"><img src="./ecommerce.jpg" alt="E-commerce Store" /></a>
+                        <h2>WEARIX</h2>
+                        <p>A modern full-stack e-commerce platform built with the MERN stack, providing a seamless shopping experience for customers and a powerful dashboard for administrators. </p>
                     </ScrollStackItem>
                     <ScrollStackItem>
                         <a href="https://worlddatlass.netlify.app" target="_blank"><img src="./world-atlas.jpg" alt="World Atlas" /></a>
