@@ -55,7 +55,7 @@ const Contact = () => {
         <section id="contact">
             <ToastContainer />
             <div className="contact-image">
-                <img src="./profile.jpg" alt="Profile image" />
+                <img src="./profile.webp" alt="Profile image" />
                 <div className="hi-bubble contact-bubble">
                     <span className="bubble-text">Hi</span>
                     <span className="bubble-hand"><MdFrontHand /></span>

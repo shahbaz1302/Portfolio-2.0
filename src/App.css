@@ -429,7 +429,8 @@ nav ul li a:hover {
 
 /***** Main Section *****/
 
-main {
+.hero-section {
+  max-width: 1200px;
   display: flex;
   justify-content: center;
   margin-top: 10rem;
@@ -549,7 +550,7 @@ main {
   font-weight: 500;
 }
 
-main img {
+.hero-section img {
   width: 22rem;
   height: 27rem;
   border-radius: 2rem;
@@ -607,11 +608,11 @@ main img {
 }
 
 @media (width<=968px) {
-  main {
+  .hero-section {
     margin-left: 8rem;
   }
 
-  main img {
+  .hero-section img {
     width: 15rem;
     height: 18rem;
   }
@@ -648,11 +649,11 @@ main img {
 }
 
 @media (width<=768px) {
-  main img {
+  .hero-section img {
     z-index: -1;
   }
 
-  main {
+  .hero-section {
     flex-direction: column;
     margin-left: 0;
     margin-top: 5rem;
@@ -705,6 +706,8 @@ main img {
 /***** About Section *****/
 
 #about {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   gap: 5rem;
   margin-top: 10rem;
@@ -844,8 +847,70 @@ main img {
 
 /***** Projects Section *****/
 
-#projects {
-  margin-top: 4rem;
+.projects-wrapper {
+  width: 100%;
+  padding: 0 16px;
+}
+
+.project-panel {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  border-radius: 20px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform-origin: center center;
+}
+
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.72) 0%,
+      rgba(0, 0, 0, 0.45) 45%,
+      rgba(0, 0, 0, 0.28) 100%
+    );
+  z-index: 1;
+}
+
+.project-panel-inner {
+  position: relative;
+  z-index: 2;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.project-panel-inner h2 {
+  margin: 0 0 16px;
+  font-size: clamp(2.5rem, 7vw, 6.5rem);
+  line-height: 0.95;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.project-panel-inner p {
+  margin: 0;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+
+ #projects {
+  margin: 4rem 2rem 0;
 
   & .project-para {
     font-size: 1.2rem;
@@ -862,6 +927,8 @@ main img {
 
 @media (width<=968px) {
   #projects {
+    margin: 4rem .5rem 0;
+
     & .project-para {
       margin-left: 2rem;
     }
@@ -874,8 +941,7 @@ main img {
 
 @media (width<=768px) {
   #projects {
-    padding: 0 1.5rem;
-    margin-top: 1rem;
+    margin: 1rem 1rem 0;
 
     & .project-para {
       font-size: 1rem;
@@ -888,7 +954,7 @@ main img {
     }
   }
 
-  .desktop-projects {
+  .projects-wrapper {
     display: none;
   }
 
@@ -896,6 +962,7 @@ main img {
     display: flex;
     flex-direction: column;
     gap: 5rem;
+    margin: 0 1rem;
   }
 
   .div-common h2 {
@@ -917,7 +984,8 @@ main img {
 /***** Education Section *****/
 
 #education {
-  margin-bottom: 15rem;
+  max-width: 1200px;
+  margin: 5rem auto 15rem;
   display: flex;
   align-items: center;
 
@@ -977,10 +1045,10 @@ main img {
 /***** Contact Section *****/
 
 #contact {
+  margin-bottom: 10rem;
   display: flex;
   align-items: center;
   gap: 5rem;
-  margin-bottom: 10rem;
 
   & img {
     width: 25rem;
@@ -1291,7 +1359,7 @@ footer {
 
 .image {
   width: 24rem;
-  height: 30rem;
+  height: 35rem;
   border-radius: 2rem;
   -webkit-border-radius: 2rem;
   -moz-border-radius: 2rem;
@@ -1376,7 +1444,7 @@ footer {
   }
 
   .image{
-    height: 25rem;
+    height: 30rem;
     width: 20rem;
   }
 

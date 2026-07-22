@@ -69,7 +69,7 @@ const Header = () => {
     <>
       <div className="header-container">
         <header className={`nav-container ${isOpen ? "open" : ""} ${scrolled ? "scrolled" : ""}`}>
-          <img src="/cropped_circle_image.png" alt="profile" />
+          <img src="/cropped-circle-image.webp" alt="profile" />
 
           <div className={`nav-status ${scrolled ? "shrink-nav" : ""} `}>
             <span className="status-text">Available for work</span>

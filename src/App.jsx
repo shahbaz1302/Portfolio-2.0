@@ -2,12 +2,14 @@ import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AppLayout } from "./UI/AppLayout";
 import { ErrorPage } from "./Pages/ErrorPage";
-import Home from "./Pages/Home";
-import AboutPage from "./Pages/AboutPage";
-import { useEffect } from "react";
+// import Home from "./Pages/Home";
+// import AboutPage from "./Pages/AboutPage";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { lazy, Suspense, useEffect } from "react";
+const Home = lazy(() => import("./Pages/Home"));
+const AboutPage = lazy(() => import("./Pages/AboutPage"));
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,41 +19,69 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { path: "/", element: <Home /> },
-      { path: "about", element: <AboutPage /> }
-    ]
-  }
+      {
+        path: "/",
+        element: (
+          <Suspense fallback={null}>
+            <Home />
+          </Suspense>
+        ),
+      },
+      {
+        path: "about",
+        element: (
+          <Suspense fallback={null}>
+            <AboutPage />
+          </Suspense>
+        ),
+      },
+    ],
+  },
 ]);
 
 const App = () => {
-
   useEffect(() => {
-  const lenis = new Lenis();
+    // Disable Lenis on small screens
+    if (window.innerWidth < 768) return;
 
-  lenis.on("scroll", ScrollTrigger.update);
+    const lenis = new Lenis({
+      smoothWheel: true,
+      lerp: 0.08,
+    });
 
-  ScrollTrigger.scrollerProxy(document.body, {
-    scrollTop(value) {
-      return arguments.length
-        ? lenis.scrollTo(value, { immediate: true })
-        : window.scrollY;
-    },
-    getBoundingClientRect() {
-      return {
-        top: 0,
-        left: 0,
-        width: window.innerWidth,
-        height: window.innerHeight,
-      };
-    },
-  });
+    lenis.on("scroll", ScrollTrigger.update);
 
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-}, []);
+    ScrollTrigger.scrollerProxy(document.body, {
+      scrollTop(value) {
+        return arguments.length
+          ? lenis.scrollTo(value, { immediate: true })
+          : window.scrollY;
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        };
+      },
+    });
+
+    let rafId;
+
+    function raf(time) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+
+    rafId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
+  }, []);
+
   return <RouterProvider router={router} />;
 };
 

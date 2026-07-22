@@ -2,12 +2,12 @@ import { MdFrontHand } from "react-icons/md";
 
 const Home = () => {
     return <>
-        <main>
+        <main className="hero-section">
             <div className="left-heading">
                 <h3>Shahbaz Khan</h3>
                 <h1>WEB</h1>
             </div>
-            <img src="./profile.jpg" alt="Profile image" />
+            <img src="./profile.webp" alt="Profile image" />
             <div className="hi-bubble">
                 <span className="bubble-text">Hi</span>
                 <span className="bubble-hand"><MdFrontHand /></span>

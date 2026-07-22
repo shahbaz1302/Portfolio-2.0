@@ -1,9 +1,16 @@
 import { useLayoutEffect, useRef, useCallback } from 'react';
 import Lenis from 'lenis';
-import './ScrollStack.css';
 
 export const ScrollStackItem = ({ children, itemClassName = '' }) => (
-  <div className={`scroll-stack-card ${itemClassName}`.trim()}>{children}</div>
+  <div
+    className={`scroll-stack-card relative w-full h-80 my-8 p-12 rounded-[40px] shadow-[0_0_30px_rgba(0,0,0,0.1)] box-border origin-top will-change-transform ${itemClassName}`.trim()}
+    style={{
+      backfaceVisibility: 'hidden',
+      transformStyle: 'preserve-3d'
+    }}
+  >
+    {children}
+  </div>
 );
 
 const ScrollStack = ({
@@ -11,7 +18,7 @@ const ScrollStack = ({
   className = '',
   itemDistance = 100,
   itemScale = 0.03,
-  itemStackDistance = 60,
+  itemStackDistance = 30,
   stackPosition = '20%',
   scaleEndPosition = '10%',
   baseScale = 0.85,
@@ -28,7 +35,6 @@ const ScrollStack = ({
   const cardsRef = useRef([]);
   const lastTransformsRef = useRef(new Map());
   const isUpdatingRef = useRef(false);
-  const cardOffsetsRef = useRef([]);
 
   const calculateProgress = useCallback((scrollTop, start, end) => {
     if (scrollTop < start) return 0;
@@ -90,7 +96,7 @@ const ScrollStack = ({
     cardsRef.current.forEach((card, i) => {
       if (!card) return;
 
-      const cardTop = cardOffsetsRef.current[i];
+      const cardTop = getElementOffset(card);
       const triggerStart = cardTop - stackPositionPx - itemStackDistance * i;
       const triggerEnd = cardTop - scaleEndPositionPx;
       const pinStart = cardTop - stackPositionPx - itemStackDistance * i;
@@ -220,14 +226,10 @@ const ScrollStack = ({
         smoothWheel: true,
         touchMultiplier: 2,
         infinite: false,
-        gestureOrientationHandler: true,
-        normalizeWheel: true,
         wheelMultiplier: 1,
-        touchInertiaMultiplier: 35,
         lerp: 0.1,
         syncTouch: true,
-        syncTouchLerp: 0.075,
-        touchInertia: 0.6
+        syncTouchLerp: 0.075
       });
 
       lenis.on('scroll', handleScroll);
@@ -273,11 +275,6 @@ const ScrollStack = ({
 
     updateCardTransforms();
 
-    cardOffsetsRef.current = cards.map(card =>
-      getElementOffset(card)
-    );
-
-
     return () => {
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
@@ -306,12 +303,35 @@ const ScrollStack = ({
     updateCardTransforms
   ]);
 
+  // Container styles based on scroll mode
+  const containerStyles = useWindowScroll
+    ? {
+        // Global scroll mode - no overflow constraints
+        overscrollBehavior: 'contain',
+        WebkitOverflowScrolling: 'touch',
+        WebkitTransform: 'translateZ(0)',
+        transform: 'translateZ(0)'
+      }
+    : {
+        // Container scroll mode - original behavior
+        overscrollBehavior: 'contain',
+        WebkitOverflowScrolling: 'touch',
+        scrollBehavior: 'smooth',
+        WebkitTransform: 'translateZ(0)',
+        transform: 'translateZ(0)',
+        willChange: 'scroll-position'
+      };
+
+  const containerClassName = useWindowScroll
+    ? `relative w-full ${className}`.trim()
+    : `relative w-full h-full overflow-y-auto overflow-x-visible ${className}`.trim();
+
   return (
-    <div className={`scroll-stack-scroller ${className}`.trim()} ref={scrollerRef}>
-      <div className="scroll-stack-inner">
+    <div className={containerClassName} ref={scrollerRef} style={containerStyles}>
+      <div className="scroll-stack-inner pt-[20vh] px-20 pb-[50rem] min-h-screen">
         {children}
         {/* Spacer so the last pin can release cleanly */}
-        <div className="scroll-stack-end" />
+        <div className="scroll-stack-end w-full h-px" />
       </div>
     </div>
   );

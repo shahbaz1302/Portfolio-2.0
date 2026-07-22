@@ -22,22 +22,20 @@ const AboutPage = () => {
 
     let isStuck = false;
 
-    ScrollTrigger.create({
+    const trigger = ScrollTrigger.create({
       trigger: techRef.current,
       start: "top bottom",
       end: "bottom top",
       onUpdate: () => {
+        if (!techRef.current || !imageRef.current) return;
+
         const techRect = techRef.current.getBoundingClientRect();
         const imageHeight = imageRef.current.offsetHeight;
         const isTablet = window.innerWidth <= 968;
-
         const offset = isTablet ? 255 : 175;
-
         const buffer = 30;
-        const shouldStick =
-          techRect.bottom <= imageHeight + offset - buffer;
+        const shouldStick = techRect.bottom <= imageHeight + offset - buffer;
 
-        // prevent repeated state toggling
         if (shouldStick !== isStuck) {
           isStuck = shouldStick;
 
@@ -45,21 +43,18 @@ const AboutPage = () => {
             duration: 0.25,
             ease: "power2.out",
             onStart: () => {
-              imageRef.current.classList.toggle(
-                "image-stuck",
-                shouldStick
-              );
-              imageRef.current.classList.toggle(
-                "image-fixed",
-                !shouldStick
-              );
-            }
+              if (!imageRef.current) return;
+              imageRef.current.classList.toggle("image-stuck", shouldStick);
+              imageRef.current.classList.toggle("image-fixed", !shouldStick);
+            },
           });
         }
-      }
+      },
     });
 
-    return () => ScrollTrigger.getAll().forEach(t => t.kill());
+    return () => {
+      trigger.kill();
+    };
   }, []);
 
 
@@ -130,7 +125,7 @@ const AboutPage = () => {
         <img
           ref={imageRef}
           className={`image ${stuck ? "image-stuck" : "image-fixed"}`}
-          src="./profile.jpg"
+          src="./working.avif"
           alt=""
         />
       </div>

@@ -4,15 +4,15 @@ import "./SwipeHoverList.css";
 
 const items = [
   {
-    img: "./laptop-person.jpg",
+    img: "./laptop-person.webp",
     text: "1. Web Development"
   },
   {
-    img: "./dragon-art.jpg",
+    img: "./dragon-art.webp",
     text: "2. Java Development"
   },
   {
-    img: "./laptop-glowing.jpg",
+    img: "./laptop-glowing.webp",
     text: "3. Version Control"
   }
 ];
@@ -30,7 +30,6 @@ export default function SwipeHoverList() {
 
     window.addEventListener("mousemove", onMouseMove);
 
-    // Initial setup
     imageRefs.current.forEach((img) => {
       gsap.set(img, {
         xPercent: -50,
