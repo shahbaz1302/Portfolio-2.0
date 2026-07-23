@@ -68,7 +68,7 @@ const AboutPage = () => {
         </div>
         <div className="social-icons">
           <a href="https://www.instagram.com/sahill__132/" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
-          <a href="https://www.linkedin.com/in/mohd-shahbaz-khan-58626b291" target="_blank" rel="noopener noreferrer"><RiLinkedinLine /></a>
+          <a href="https://www.linkedin.com/in/mohd-shahbaz-khannn" target="_blank" rel="noopener noreferrer"><RiLinkedinLine /></a>
           <a href="https://github.com/shahbaz1302" target="_blank" rel="noopener noreferrer"><FiGithub /></a>
         </div>
         <button className="btn contact-btn" ref={btnRef}><a href="https://drive.google.com/file/d/1HcJpaZupD6atTTU99cmsiXBpCWlM84bo/view?usp=drive_link"
