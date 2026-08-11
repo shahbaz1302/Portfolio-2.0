@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { FiMenu, FiX, FiMoon, FiSun } from "react-icons/fi";
-import useButtonHover from "../../hooks/useButtonHover";
+import useButtonHover from "../hooks/useButtonHover";
 import { NavLink } from "react-router-dom";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("theme") || "light";
+  });
   const [scrolled, setScrolled] = useState(false);
   const btnRef = useRef(null);
-  useButtonHover(btnRef, "var(--dark-theme-color)","");
+  useButtonHover(btnRef, "var(--dark-theme-color)", "");
 
   const menuItems = [
     { id: "about", label: "About" },
@@ -25,6 +27,7 @@ const Header = () => {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   useEffect(() => {

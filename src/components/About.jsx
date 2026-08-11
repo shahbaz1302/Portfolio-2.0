@@ -3,7 +3,7 @@ import ScrollFloat from "../Layout/ScrollFloat";
 import { FaInstagram } from "react-icons/fa";
 import { FiGithub } from "react-icons/fi";
 import { RiLinkedinLine } from "react-icons/ri";
-import useButtonHover from "../../hooks/useButtonHover";
+import useButtonHover from "../hooks/useButtonHover";
 import { NavLink } from "react-router-dom";
 
 const About = ({ sectionRef }) => {

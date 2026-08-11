@@ -6,7 +6,7 @@ import SwipeHoverList from "../Layout/SwipeHoverList"
 import { useEffect, useRef, useState } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import useButtonHover from "../../hooks/useButtonHover"
+import useButtonHover from "../hooks/useButtonHover"
 
 gsap.registerPlugin(ScrollTrigger)
 

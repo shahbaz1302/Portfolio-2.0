@@ -2,14 +2,12 @@ import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AppLayout } from "./UI/AppLayout";
 import { ErrorPage } from "./Pages/ErrorPage";
-// import Home from "./Pages/Home";
-// import AboutPage from "./Pages/AboutPage";
+import Home from "./Pages/Home";
+import AboutPage from "./Pages/AboutPage";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { lazy, Suspense, useEffect } from "react";
-const Home = lazy(() => import("./Pages/Home"));
-const AboutPage = lazy(() => import("./Pages/AboutPage"));
+import { useEffect } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,19 +19,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: (
-          <Suspense fallback={null}>
-            <Home />
-          </Suspense>
-        ),
+        element: <Home />,
       },
       {
         path: "about",
-        element: (
-          <Suspense fallback={null}>
-            <AboutPage />
-          </Suspense>
-        ),
+        element: <AboutPage />,
       },
     ],
   },
